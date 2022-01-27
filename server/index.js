@@ -1,12 +1,21 @@
 require("dotenv").config();
 const express = require("express");
+const querystring = require("querystring");
 const app = express();
-const port = 8080;
+const axios = require("axios");
+const path = require("path");
+
 const CLIENT_ID = process.env.CLIENT_ID;
 const CLIENT_SECRET = process.env.CLIENT_SECRET;
 const REDIRECT_URI = process.env.REDIRECT_URI;
-const querystring = require("querystring");
-const axios = require("axios");
+const FRONT_END_URI = process.env.FRONT_END_URI;
+const PORT = process.PORT || 8080;
+
+app.use(express.static(path.resolve(__dirname, "../frontend/build")));
+
+app.get("/", (req, res) => {
+  res.send("This is an express app");
+});
 
 const generateRandomString = (length) => {
   let text = "";
@@ -18,11 +27,6 @@ const generateRandomString = (length) => {
   }
   return text;
 };
-
-app.get("/", (req, res) => {
-  res.send("This is an express app");
-});
-
 const stateKey = "spotify_auth_state";
 
 app.get("/login", (req, res) => {
@@ -69,7 +73,7 @@ app.get("/callback", (req, res) => {
           expires_in,
         });
 
-        res.redirect(`http://localhost:3000/?${queryParams}`);
+        res.redirect(`${FRONT_END_URI}?${queryParams}`);
       } else {
         res.redirect(`/${queryString.stringify({ error: "invalid_token" })}`);
         // res.redirect(`/refresh-token`);
@@ -105,8 +109,15 @@ app.get("/refresh_token", (req, res) => {
     });
 });
 
-app.listen(port, () => {
-  console.log(`App running at http://localhost:${port}`);
+/**
+ * All remaining request return to the React App, so It cna hande routing
+ */
+app.get("*", (req, res) => {
+  res.send(path.resolve(__dirname, "../frontend/build", "index.html"));
+});
+
+app.listen(PORT, () => {
+  console.log(`App running at http://localhost:${PORT}`);
 });
 
 console.log(process.env.CLIENT_ID);

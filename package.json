@@ -1,0 +1,31 @@
+{
+  "name": "spotify-app",
+  "version": "1.0.0",
+  "engines": {
+    "node": "14.18.3"
+  },
+  "cacheDirectory": [
+    "frontend/node_modules",
+    "server/node_mnodules"
+  ],
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build_frontend": "NODE_ENV=production && cd frontend/ && npm install && npm build",
+    "start_server": "NODE_ENV=production && cd server/ && npm install && node index.js",
+    "start": "npm run build_frontend && npm run start_server ",
+    "start-server-frontend": "npm run build_frontend && npm run start_server"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kevinmartell91/spotify-app.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kevinmartell91/spotify-app/issues"
+  },
+  "homepage": "https://github.com/kevinmartell91/spotify-app#readme"
+}
