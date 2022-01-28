@@ -2,7 +2,8 @@
   "name": "spotify-app",
   "version": "1.0.0",
   "engines": {
-    "node": "14.18.3"
+    "node": "14.18.3",
+    "npm": "8.3.2"
   },
   "cacheDirectory": [
     "frontend/node_modules",
@@ -11,11 +12,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "build_frontend": "NODE_ENV=production && cd frontend/ && npm install && npm run build",
-    "start_server": "NODE_ENV=production && cd server/ && npm install",
-    "start": "NODE_ENV=production cd server/ && node index.js",
-    "heroku-postbuild": "npm run build_frontend && npm run start_server"
+    "start": "NODE_ENV=production && cd server/ && npm install && node index.js",
+    "build": "NODE_ENV=production && cd frontend/ && npm install && npm run build"
   },
   "repository": {
     "type": "git",

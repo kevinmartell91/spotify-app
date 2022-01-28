@@ -9,7 +9,7 @@ const CLIENT_ID = process.env.CLIENT_ID;
 const CLIENT_SECRET = process.env.CLIENT_SECRET;
 const REDIRECT_URI = process.env.REDIRECT_URI;
 const FRONT_END_URI = process.env.FRONT_END_URI;
-const PORT = process.PORT || 8080;
+const PORT = process.env.PORT || 8080;
 
 app.use(express.static(path.resolve(__dirname, "../frontend/build")));
 
@@ -119,5 +119,3 @@ app.get("*", (req, res) => {
 app.listen(PORT, () => {
   console.log(`App running at http://localhost:${PORT}`);
 });
-
-console.log(process.env.CLIENT_ID);
