@@ -12,10 +12,10 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build_frontend": "NODE_ENV=production && cd frontend/ && npm install && npm build",
-    "start_server": "NODE_ENV=production && cd server/ && npm install && node index.js",
-    "start": "npm run build_frontend && npm run start_server ",
-    "start-server-frontend": "npm run build_frontend && npm run start_server"
+    "build_frontend": "NODE_ENV=production && cd frontend/ && npm install && npm run build",
+    "start_server": "NODE_ENV=production && cd server/ && npm install",
+    "start": "NODE_ENV=production cd server/ && node index.js",
+    "heroku-postbuild": "npm run build_frontend && npm run start_server"
   },
   "repository": {
     "type": "git",
